@@ -1,0 +1,60 @@
+{
+  "name": "question-generator",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@material-ui/core": "^4.11.0",
+    "@material-ui/icons": "^4.9.1",
+    "@progress/kendo-drawing": "^1.9.3",
+    "@progress/kendo-react-pdf": "^4.1.0",
+    "@react-pdf/renderer": "^1.6.12",
+    "@testing-library/jest-dom": "^4.2.4",
+    "@testing-library/react": "^9.5.0",
+    "@testing-library/user-event": "^7.2.1",
+    "axios": "^0.21.1",
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1",
+    "js-cookie": "^2.2.1",
+    "mathjax": "^2.7.9",
+    "mathjax-full": "^3.1.2",
+    "mathjax-react": "^1.0.5",
+    "mathjax3-react": "^1.0.11",
+    "mongoose": "^5.11.4",
+    "multiselect-react-dropdown": "^1.5.7",
+    "nookies": "^2.5.2",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "react-icons": "^4.2.0",
+    "react-latex": "^2.0.0",
+    "react-mathjax": "^1.0.1",
+    "react-phone-input-2": "^2.13.8",
+    "react-router-dom": "^5.2.0",
+    "react-script-tag": "^1.1.2",
+    "react-scripts": "3.4.3",
+    "react-to-print": "^2.10.0",
+    "validator": "^13.6.0"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {},
+  "proxy": "http://localhost:5000/"
+}
