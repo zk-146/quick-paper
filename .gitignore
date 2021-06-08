@@ -1,0 +1,5 @@
+/server/dev.env.local
+/server/node_modules
+/client/src/.env
+/client/node_modules
+/client/debug.log
