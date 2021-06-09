@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from "react";
 import axios from "../axios";
+import handleCheckboxChange from "./handleCheckboxChange";
+import numInput from "./numInput";
+import selectAllChapters from "./selectAllChapters";
 import "./Table.css";
 
 const Table = (props) => {
@@ -66,121 +69,13 @@ const Table = (props) => {
         : (totalCount += parseInt(data.value));
     });
 
-    function handleTotalChange(totalCount) {
+    const handleTotalChange = (totalCount) => {
       return props.onChange(totalCount);
-    }
+    };
 
     handleTotalChange(totalCount);
     totalQuestionsChange(totalCount);
   }, [allChapters, props]);
-
-  function handleCheckboxChange(id) {
-    let index = id - 1;
-    let chapters = [...allChapters];
-    let length = chapters.length;
-    let isChecked = chapters[index].isChecked;
-
-    if (isChecked === false) {
-      let i, checkForSelectAll;
-      let count = 0;
-      chapters[index] = {
-        id: chapters[index].id,
-        name: chapters[index].name,
-        value: chapters[index].value,
-        isChecked: true,
-        isCheckBoxDis: chapters[index].isCheckBoxDis,
-        isNumDisabled: false,
-        isRandChecked: chapters[index].isRandChecked,
-      };
-      for (i = 0; i < length; i++) {
-        checkForSelectAll = chapters[i].isChecked;
-        if (checkForSelectAll === true) {
-          count++;
-        }
-        if (count === length) {
-          changeSelectAll(true);
-        }
-      }
-    } else {
-      chapters[index] = {
-        id: chapters[index].id,
-        name: chapters[index].name,
-        value: "",
-        isChecked: false,
-        isCheckBoxDis: chapters[index].isCheckBoxDis,
-        isNumDisabled: true,
-        isRandChecked: chapters[index].isRandChecked,
-      };
-      changeSelectAll(false);
-    }
-    allChaptersChange(chapters);
-  }
-
-  function numInput(event, id) {
-    let pattern = /^([0-1]?[0-9]|20)$/;
-    let value = event.target.value;
-    let index = id - 1;
-    let chapters = [...allChapters];
-
-    if (pattern.test(value)) {
-      chapters[index] = {
-        id: chapters[index].id,
-        name: chapters[index].name,
-        value: value,
-        isChecked: chapters[index].isChecked,
-        isCheckBoxDis: chapters[index].isCheckBoxDis,
-        isNumDisabled: chapters[index].isNumDisabled,
-        isRandChecked: chapters[index].isRandChecked,
-      };
-      // enteredNumbers();
-    } else {
-      alert("Input should be number only and it should not be more than 20!");
-      chapters[index] = {
-        id: chapters[index].id,
-        name: chapters[index].name,
-        value: "",
-        isChecked: chapters[index].isChecked,
-        isCheckBoxDis: chapters[index].isCheckBoxDis,
-        isNumDisabled: chapters[index].isNumDisabled,
-        isRandChecked: chapters[index].isRandChecked,
-      };
-      // enteredNumbers();
-    }
-    allChaptersChange(chapters);
-  }
-
-  function selectAll1() {
-    let chapters = [...allChapters];
-    let length = allChapters.length;
-    let i;
-
-    if (selectAll) {
-      for (i = 0; i < length; i++) {
-        chapters[i] = {
-          id: chapters[i].id,
-          name: chapters[i].name,
-          value: "",
-          isChecked: false,
-          isCheckBoxDis: false,
-          isNumDisabled: true,
-          isRandChecked: chapters[i].isRandChecked,
-        };
-      }
-    } else {
-      for (i = 0; i < length; i++) {
-        chapters[i] = {
-          id: chapters[i].id,
-          name: chapters[i].name,
-          value: chapters[i].value,
-          isChecked: true,
-          isCheckBoxDis: false,
-          isNumDisabled: false,
-          isRandChecked: chapters[i].isRandChecked,
-        };
-      }
-    }
-    allChaptersChange(chapters);
-  }
 
   return (
     <div className="table">
@@ -205,7 +100,7 @@ const Table = (props) => {
                 selectAll === true
                   ? changeSelectAll(false)
                   : changeSelectAll(true);
-                selectAll1();
+                selectAllChapters(allChapters, allChaptersChange, selectAll);
               }}
             />
           </div>
@@ -227,7 +122,12 @@ const Table = (props) => {
                   checked={data.isChecked}
                   disabled={data.isCheckBoxDis}
                   onChange={() => {
-                    handleCheckboxChange(data.id);
+                    handleCheckboxChange(
+                      data.id,
+                      changeSelectAll,
+                      allChaptersChange,
+                      allChapters
+                    );
                   }}
                 />
               </div>
@@ -242,7 +142,7 @@ const Table = (props) => {
                   value={data.value}
                   disabled={data.isNumDisabled}
                   onChange={(event) => {
-                    numInput(event, data.id);
+                    numInput(event, data.id, allChapters, allChaptersChange);
                   }}
                 />
               </div>
