@@ -1,19 +1,15 @@
 import React, { useState } from "react";
 import "./Account.css";
 import Profile from "./Profile/Profile";
-import SetPaperAccount from "./SetPaper/SetPaperAccount";
 import SavedPaperAccount from "./SavedPaper/SavedPaperAccount";
 
 function Account() {
   let [profile, setProfile] = useState(true);
-  let [setPaper, setSetPaper] = useState(false);
   let [savedPaper, setSavedPaper] = useState(false);
 
   function handleClick() {
     if (profile) {
       return <Profile />;
-    } else if (setPaper) {
-      return <SetPaperAccount />;
     } else if (savedPaper) {
       return <SavedPaperAccount />;
     }
@@ -30,26 +26,11 @@ function Account() {
                 : "account__sidebarProfile"
             }
             onClick={() => {
-              setSetPaper(false);
               setSavedPaper(false);
               setProfile(true);
             }}
           >
             <p>Profile</p>
-          </div>
-          <div
-            className={
-              setPaper === true
-                ? "account__sidebarSetPaper account__sidebarSelected"
-                : "account__sidebarSetPaper"
-            }
-            onClick={() => {
-              setProfile(false);
-              setSavedPaper(false);
-              setSetPaper(true);
-            }}
-          >
-            <p>Set Paper</p>
           </div>
           <div
             className={
@@ -59,7 +40,6 @@ function Account() {
             }
             onClick={() => {
               setProfile(false);
-              setSetPaper(false);
               setSavedPaper(true);
             }}
           >
