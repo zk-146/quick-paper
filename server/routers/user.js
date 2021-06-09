@@ -1,6 +1,5 @@
 const express = require("express");
 const Authenticated = require("../middleware/Authenticated");
-const get_cookies = require("../helpers/get_cookies");
 const router = express.Router();
 const User = require("../models/users");
 const validator = require("validator");
@@ -110,16 +109,13 @@ router.post("/logout", async (req, res) => {
 router.post(
   "/change-name",
   Authenticated(async (req, res) => {
-    const { user } = get_cookies(req);
-    const userDetails = JSON.parse(decodeURIComponent(user));
-
     const name = req.body.name;
 
     console.log(name);
 
     try {
       await User.findOneAndUpdate(
-        { _id: userDetails._id },
+        { _id: req.userId },
         {
           $set: { name: name },
         },
@@ -129,9 +125,8 @@ router.post(
           }
         }
       );
-      const userData = await User.findById(userDetails._id);
+      const userData = await User.findById(req.userId);
       userData.password = undefined;
-      console.log(userData);
       res.cookie("user", JSON.stringify(userData), {
         expires: new Date(new Date().getTime() + 604800 * 1000),
       });

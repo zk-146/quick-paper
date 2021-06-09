@@ -5,8 +5,6 @@ const PhysicsQuestions = require("../models/dbPhysicsQuestions");
 const ChemistryQuestions = require("../models/dbChemistryQuestions");
 const MathsQuestions = require("../models/dbMathsQuestions");
 const BiologyQuestions = require("../models/dbBiologyQuestions");
-const get_cookies = require("../helpers/get_cookies");
-const jwt = require("jsonwebtoken");
 const User = require("../models/users");
 
 const limit = 75;
@@ -206,11 +204,7 @@ router.post(
     }
 
     try {
-      const { token } = get_cookies(req);
-
-      const userId = jwt.verify(token, process.env.JWT_SECRET)._id;
-
-      const user = await User.findById(userId);
+      const user = await User.findById(req.userId);
       if (user.role === "admin") {
         if (subject === "Physics") {
           await PhysicsQuestions.create(

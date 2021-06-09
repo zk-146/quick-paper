@@ -68,14 +68,11 @@ router.post(
   "/save-paper",
   Authenticated((req, res) => {
     try {
-      const { user } = get_cookies(req);
-      if (!user) {
-        return res.status(401).send({ error: "No user data" });
-      }
-      const decodedUser = JSON.parse(decodeURIComponent(user));
-
       const paperData = req.body.paperData;
-      paperData.user = decodedUser._id;
+
+      paperData.user = req.userId;
+      console.log(req.userId);
+      console.log(paperData);
       SavedPaper.create(paperData, (err, data) => {
         if (err) {
           console.log(err);
@@ -95,13 +92,7 @@ router.get(
   "/save-paper",
   Authenticated((req, res) => {
     try {
-      const { user } = get_cookies(req);
-      if (!user) {
-        return res.status(401).send({ error: "No user data" });
-      }
-      const decodedUser = JSON.parse(decodeURIComponent(user));
-
-      SavedPaper.find({ user: decodedUser._id }, (err, data) => {
+      SavedPaper.find({ user: req.userId }, (err, data) => {
         if (err) {
           console.log(err);
           return res.status(500).send(err);

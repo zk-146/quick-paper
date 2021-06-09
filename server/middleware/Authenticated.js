@@ -8,8 +8,9 @@ function Authenticated(icomponent) {
       return res.status(401).json({ error: "You must be logged in" });
     }
     try {
-      const { userId } = jwt.verify(authorization, process.env.JWT_SECRET);
-      req.userId = userId;
+      const { _id } = jwt.verify(authorization, process.env.JWT_SECRET);
+      console.log(_id);
+      req.userId = _id;
       return icomponent(req, res);
     } catch (err) {
       console.log(err);
