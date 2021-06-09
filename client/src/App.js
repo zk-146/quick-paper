@@ -11,7 +11,6 @@ import Account from "./Account/Account";
 import SavedPaper from "./Account/SavedPaper/SavedPaper";
 import { parseCookies } from "nookies";
 import { useStateValue } from "./Context/StateProvider";
-import Home from "./Home/Home";
 import DisplayLatex from "./DisplayLatex/DisplayLatex";
 
 function App() {
@@ -37,10 +36,6 @@ function App() {
               <Nav />
               <SignUp />
             </Route>
-            {/* <Route path="/signin">
-              <Nav />
-              <Login />
-            </Route> */}
             <Route path="/forgotpassword">
               <Nav />
               <ForgotPassword />
@@ -52,10 +47,6 @@ function App() {
           </Switch>
         ) : (
           <Switch>
-            {/* <Route path="/setpaper">
-              <Nav />
-              <SetPaper />
-            </Route> */}
             <Route path="/savedPaper">
               <Nav />
               <SavedPaper />
