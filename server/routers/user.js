@@ -48,7 +48,7 @@ router.post("/signup", async (req, res) => {
       expires: new Date(new Date().getTime() + 604800 * 1000),
     });
 
-    res.status(201).send("Cookie sent");
+    res.status(201).send("Account created");
   } catch (err) {
     if (err.code === 11000) {
       return res
@@ -102,7 +102,7 @@ router.post("/logout", async (req, res) => {
   try {
     res.status(200).clearCookie("token").send("Token removed");
   } catch (err) {
-    res.status(500).send();
+    res.status(400).send();
   }
 });
 
@@ -110,8 +110,6 @@ router.post(
   "/change-name",
   Authenticated(async (req, res) => {
     const name = req.body.name;
-
-    console.log(name);
 
     try {
       await User.findOneAndUpdate(
@@ -133,7 +131,7 @@ router.post(
       return res.status(200).send();
     } catch (err) {
       console.log(err);
-      return res.status(500).send();
+      return res.status(400).send();
     }
   })
 );

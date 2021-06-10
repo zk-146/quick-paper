@@ -83,7 +83,7 @@ router.post(
       });
     } catch (err) {
       console.log(err);
-      return res.status(500).send(err);
+      return res.status(500).send();
     }
   })
 );
@@ -95,13 +95,13 @@ router.get(
       SavedPaper.find({ user: req.userId }, (err, data) => {
         if (err) {
           console.log(err);
-          return res.status(500).send(err);
+          return res.status(500).send();
         }
         return res.status(200).send(data);
       });
     } catch (err) {
       console.log(err);
-      return res.status(500).send(err);
+      return res.status(400).send();
     }
   })
 );

@@ -12,14 +12,14 @@ router.get(
     try {
       PhysicsChapters.find((err, data) => {
         if (err) {
-          res.status(500).send(err);
+          return res.status(500).send();
         } else {
           res.status(200).send(data);
         }
       });
     } catch (err) {
       console.log(err);
-      res.status(500).send();
+      return res.status(500).send();
     }
   })
 );
@@ -31,30 +31,32 @@ router.post(
       const dbchapters = req.body;
       PhysicsChapters.create(dbchapters, (err, data) => {
         if (err) {
-          res.status(500).send(err);
+          return res.status(500).send();
         } else {
-          res.status(201).send(data);
+          return res.status(201).send(data);
         }
       });
     } catch (err) {
       console.log(err);
+      return res.status(400).send();
     }
   })
 );
+
 router.get(
   "/setpaper/chemistry",
   Authenticated(async (req, res) => {
     try {
       ChemistryChapters.find((err, data) => {
         if (err) {
-          res.status(500).send(err);
+          return res.status(500).send();
         } else {
-          res.status(200).send(data);
+          return res.status(200).send(data);
         }
       });
     } catch (err) {
       console.log(err);
-      res.status(500).send();
+      return res.status(500).send();
     }
   })
 );
@@ -66,30 +68,32 @@ router.post(
       const dbchapters = req.body;
       ChemistryChapters.create(dbchapters, (err, data) => {
         if (err) {
-          res.status(500).send(err);
+          return res.status(500).send();
         } else {
-          res.status(201).send(data);
+          return res.status(201).send(data);
         }
       });
     } catch (err) {
       console.log(err);
+      return res.status(400).send();
     }
   })
 );
+
 router.get(
   "/setpaper/maths",
   Authenticated(async (req, res) => {
     try {
       MathsChapters.find((err, data) => {
         if (err) {
-          res.status(500).send(err);
+          res.status(500).send();
         } else {
           res.status(200).send(data);
         }
       });
     } catch (err) {
       console.log(err);
-      res.status(500).send();
+      return res.status(400).send();
     }
   })
 );
@@ -101,30 +105,32 @@ router.post(
       const dbchapters = req.body;
       MathsChapters.create(dbchapters, (err, data) => {
         if (err) {
-          res.status(500).send(err);
+          return res.status(500).send();
         } else {
-          res.status(201).send(data);
+          return res.status(201).send(data);
         }
       });
     } catch (err) {
       console.log(err);
+      return res.status(400).send();
     }
   })
 );
+
 router.get(
   "/setpaper/biology",
   Authenticated(async (req, res) => {
     try {
       BiologyChapters.find((err, data) => {
         if (err) {
-          res.status(500).send(err);
+          return res.status(500).send();
         } else {
-          res.status(200).send(data);
+          return res.status(200).send(data);
         }
       });
     } catch (err) {
       console.log(err);
-      res.status(500).send();
+      return res.status(500).send();
     }
   })
 );
@@ -136,13 +142,14 @@ router.post(
       const dbchapters = req.body;
       BiologyChapters.create(dbchapters, (err, data) => {
         if (err) {
-          res.status(500).send(err);
+          return res.status(500).send();
         } else {
-          res.status(201).send(data);
+          return res.status(201).send(data);
         }
       });
     } catch (err) {
       console.log(err);
+      return res.status(400).send();
     }
   })
 );
