@@ -38,7 +38,6 @@ function Login() {
       setError(err.response.data.error);
     }
   }
-  // khanzaid1015@gmail.com
 
   return (
     <div className="login">

@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import "./Profile.css";
 import EditIcon from "@material-ui/icons/Edit";
-// import PhoneInput from "react-phone-input-2";
 import { parseCookies } from "nookies";
 import axios from "../../axios";
 
@@ -15,8 +14,6 @@ function Profile() {
   const [editPassword, setEditPassword] = useState(false);
   const [, setPassword] = useState("password");
   const [, setNewPassword] = useState("");
-  // const [editPhone, setEditPhone] = useState(false);
-  // const [phone, setPhone] = useState("+917718964516");
   const { mobile } = user;
 
   const changeName = async () => {

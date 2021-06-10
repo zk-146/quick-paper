@@ -45,7 +45,7 @@ function DisplayLatex() {
   const uploadQuestion = async (e) => {
     e.preventDefault();
     await axios
-      .post("/add-question", {
+      .post(`/add-question/${subject.toLowerCase()}`, {
         question,
         option1,
         option2,

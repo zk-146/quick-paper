@@ -199,7 +199,6 @@ function DisplayPaper() {
     });
 
     const paperData = {
-      // user: user.xa,
       phyArr: physics_questions,
       chemArr: chemistry_questions,
       mathsArr: maths_questions,

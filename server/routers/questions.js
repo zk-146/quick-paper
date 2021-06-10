@@ -6,18 +6,18 @@ const ChemistryQuestions = require("../models/dbChemistryQuestions");
 const MathsQuestions = require("../models/dbMathsQuestions");
 const BiologyQuestions = require("../models/dbBiologyQuestions");
 const User = require("../models/users");
+const getQuestions = require("../helpers/getQuestions");
+const uploadQuestion = require("../helpers/uploadQuestions");
 
 const limit = 75;
 
 router.get(
   "/displaypaper/physics",
   Authenticated(async (req, res) => {
-    var query = req.query;
+    const query = req.query;
     const phyChapters = req.query.phyChptList;
 
-    var phyQuestions = [];
-
-    var questions = parseInt(query.phyQuestions);
+    const questions = parseInt(query.phyQuestions);
     if (questions > limit || questions < 1) {
       res.status(400).send();
       return;
@@ -28,22 +28,11 @@ router.get(
       questions > 0
     ) {
       try {
-        for (let i = 0; i < phyChapters.length; i++) {
-          const topicName = JSON.parse(phyChapters[i]).topicName;
-          const limit1 = parseInt(JSON.parse(phyChapters[i]).value);
-          const chemData = await PhysicsQuestions.aggregate([
-            { $match: { topicName } },
-            { $sample: { size: limit1 } },
-          ]);
-          chemData.forEach((data) => {
-            phyQuestions.push(data);
-          });
-        }
-        res.status(200).send(phyQuestions);
-        return;
+        const phyQuestions = await getQuestions(phyChapters, PhysicsQuestions);
+        return res.status(200).send(phyQuestions);
       } catch (err) {
-        res.status(500).send(err);
-        return;
+        console.log(err);
+        return res.status(400).send();
       }
     }
   })
@@ -55,12 +44,9 @@ router.get(
     var query = req.query;
     const chemChapters = req.query.chemChptList;
 
-    var chemQuestions = [];
-
     var questions = parseInt(query.chemQuestions);
     if (questions > limit || questions < 1) {
-      res.status(400).send();
-      return;
+      return res.status(400).send();
     }
     if (
       query.hasOwnProperty("chemQuestions") &&
@@ -68,23 +54,14 @@ router.get(
       questions > 0
     ) {
       try {
-        for (let i = 0; i < chemChapters.length; i++) {
-          const topicName = JSON.parse(chemChapters[i]).topicName;
-          const limit1 = parseInt(JSON.parse(chemChapters[i]).value);
-          const chemData = await ChemistryQuestions.aggregate([
-            { $match: { topicName } },
-            { $sample: { size: limit1 } },
-          ]);
-          chemData.forEach((data) => {
-            chemQuestions.push(data);
-          });
-        }
-        res.status(200).send(chemQuestions);
-        return;
+        const chemQuestions = await getQuestions(
+          chemChapters,
+          ChemistryQuestions
+        );
+        return res.status(200).send(chemQuestions);
       } catch (err) {
         console.log(err);
-        res.status(500).send(err);
-        return;
+        return res.status(400).send();
       }
     }
   })
@@ -93,15 +70,12 @@ router.get(
 router.get(
   "/displaypaper/maths",
   Authenticated(async (req, res) => {
-    var query = req.query;
+    const query = req.query;
     const mathsChapters = req.query.mathsChptList;
 
-    var mathsQuestions = [];
-
-    var questions = parseInt(query.mathsQuestions);
+    const questions = parseInt(query.mathsQuestions);
     if (questions > limit || questions < 1) {
-      res.status(400).send();
-      return;
+      return res.status(400).send();
     }
     if (
       query.hasOwnProperty("mathsQuestions") &&
@@ -109,23 +83,14 @@ router.get(
       questions > 0
     ) {
       try {
-        for (let i = 0; i < mathsChapters.length; i++) {
-          const topicName = JSON.parse(mathsChapters[i]).topicName;
-          const limit1 = parseInt(JSON.parse(mathsChapters[i]).value);
-          const chemData = await MathsQuestions.aggregate([
-            { $match: { topicName } },
-            { $sample: { size: limit1 } },
-          ]);
-          chemData.forEach((data) => {
-            mathsQuestions.push(data);
-          });
-        }
-        res.status(200).send(mathsQuestions);
-        return;
+        const mathsQuestions = await getQuestions(
+          mathsChapters,
+          MathsQuestions
+        );
+        return res.status(200).send(mathsQuestions);
       } catch (err) {
         console.log(err);
-        res.status(500).send(err);
-        return;
+        return res.status(400).send();
       }
     }
   })
@@ -137,12 +102,9 @@ router.get(
     var query = req.query;
     const bioChapters = req.query.bioChptList;
 
-    var bioQuestions = [];
-
     var questions = parseInt(query.bioQuestions);
     if (questions > limit || questions < 1) {
-      res.status(400).send();
-      return;
+      return res.status(400).send();
     }
     if (
       query.hasOwnProperty("bioQuestions") &&
@@ -150,30 +112,18 @@ router.get(
       questions > 0
     ) {
       try {
-        for (let i = 0; i < bioChapters.length; i++) {
-          const topicName = JSON.parse(bioChapters[i]).topicName;
-          const limit1 = parseInt(JSON.parse(bioChapters[i]).value);
-          const chemData = await BiologyQuestions.aggregate([
-            { $match: { topicName } },
-            { $sample: { size: limit1 } },
-          ]);
-          chemData.forEach((data) => {
-            bioQuestions.push(data);
-          });
-        }
-        res.status(200).send(bioQuestions);
-        return;
+        const bioQuestions = await getQuestions(bioChapters, BiologyQuestions);
+        return res.status(200).send(bioQuestions);
       } catch (err) {
         console.log(err);
-        res.status(500).send(err);
-        return;
+        return res.status(400).send();
       }
     }
   })
 );
 
 router.post(
-  "/add-question",
+  "/add-question/physics",
   Authenticated(async (req, res) => {
     const {
       question,
@@ -204,28 +154,21 @@ router.post(
     }
 
     try {
-      const user = await User.findById(req.userId);
+      const user = await User.findById(req.userId.toString());
       if (user.role === "admin") {
         if (subject === "Physics") {
-          await PhysicsQuestions.create(
-            {
-              question,
-              option1,
-              option2,
-              option3,
-              option4,
-              answer,
-              difficulty: difficulty.toLowerCase(),
-              topicName,
-            },
-            (err, data) => {
-              if (err) console.log(err);
-              if (data)
-                return res.send({
-                  data,
-                });
-            }
+          const questionData = await uploadQuestion(
+            PhysicsQuestions,
+            question,
+            option1,
+            option2,
+            option3,
+            option4,
+            answer,
+            difficulty,
+            topicName
           );
+          return res.status(201).send(questionData);
         }
       } else {
         console.log("Unauthorized");
@@ -233,7 +176,184 @@ router.post(
       }
     } catch (err) {
       console.log(err);
-      res.status(500).json("Internal server occurred");
+      return res.status(500).json("Internal server occurred");
+    }
+  })
+);
+
+router.post(
+  "/add-question/chemistry",
+  Authenticated(async (req, res) => {
+    const {
+      question,
+      option1,
+      option2,
+      option3,
+      option4,
+      subject,
+      answer,
+      difficulty,
+      topicName,
+    } = req.body;
+
+    if (
+      !question ||
+      !option1 ||
+      !option2 ||
+      !option3 ||
+      !option4 ||
+      !subject ||
+      !answer ||
+      !difficulty ||
+      !topicName
+    ) {
+      return res
+        .status(422)
+        .json({ error: "Please fill all the required fields" });
+    }
+
+    try {
+      const user = await User.findById(req.userId.toString());
+      if (user.role === "admin") {
+        if (subject === "Chemistry") {
+          const questionData = await uploadQuestion(
+            ChemistryQuestions,
+            question,
+            option1,
+            option2,
+            option3,
+            option4,
+            answer,
+            difficulty,
+            topicName
+          );
+          return res.status(201).send(questionData);
+        }
+      } else {
+        console.log("Unauthorized");
+        return res.status(401).json({ error: "Unauthorized access!" });
+      }
+    } catch (err) {
+      console.log(err);
+      return res.status(500).json("Internal server occurred");
+    }
+  })
+);
+
+router.post(
+  "/add-question/maths",
+  Authenticated(async (req, res) => {
+    const {
+      question,
+      option1,
+      option2,
+      option3,
+      option4,
+      subject,
+      answer,
+      difficulty,
+      topicName,
+    } = req.body;
+
+    if (
+      !question ||
+      !option1 ||
+      !option2 ||
+      !option3 ||
+      !option4 ||
+      !subject ||
+      !answer ||
+      !difficulty ||
+      !topicName
+    ) {
+      return res
+        .status(422)
+        .json({ error: "Please fill all the required fields" });
+    }
+
+    try {
+      const user = await User.findById(req.userId.toString());
+      if (user.role === "admin") {
+        if (subject === "Maths") {
+          const questionData = await uploadQuestion(
+            MathsQuestions,
+            question,
+            option1,
+            option2,
+            option3,
+            option4,
+            answer,
+            difficulty,
+            topicName
+          );
+          return res.status(201).send(questionData);
+        }
+      } else {
+        console.log("Unauthorized");
+        return res.status(401).json({ error: "Unauthorized access!" });
+      }
+    } catch (err) {
+      console.log(err);
+      return res.status(500).json("Internal server occurred");
+    }
+  })
+);
+
+router.post(
+  "/add-question/biology",
+  Authenticated(async (req, res) => {
+    const {
+      question,
+      option1,
+      option2,
+      option3,
+      option4,
+      subject,
+      answer,
+      difficulty,
+      topicName,
+    } = req.body;
+
+    if (
+      !question ||
+      !option1 ||
+      !option2 ||
+      !option3 ||
+      !option4 ||
+      !subject ||
+      !answer ||
+      !difficulty ||
+      !topicName
+    ) {
+      return res
+        .status(422)
+        .json({ error: "Please fill all the required fields" });
+    }
+
+    try {
+      const user = await User.findById(req.userId.toString());
+      if (user.role === "admin") {
+        if (subject === "Biology") {
+          const questionData = await uploadQuestion(
+            BiologyQuestions,
+            question,
+            option1,
+            option2,
+            option3,
+            option4,
+            answer,
+            difficulty,
+            topicName
+          );
+          return res.status(201).send(questionData);
+        }
+      } else {
+        console.log("Unauthorized");
+        return res.status(401).json({ error: "Unauthorized access!" });
+      }
+    } catch (err) {
+      console.log(err);
+      return res.status(500).json("Internal server occurred");
     }
   })
 );
