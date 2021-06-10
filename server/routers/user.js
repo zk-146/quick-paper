@@ -24,10 +24,10 @@ router.post("/signup", async (req, res) => {
     }
 
     const user = await new User({
-      name,
-      email,
-      password,
-      mobile,
+      name: String(name),
+      email: String(email),
+      password: String(password),
+      mobile: String(mobile),
       role: "user",
     }).save();
 
@@ -113,9 +113,9 @@ router.post(
 
     try {
       await User.findOneAndUpdate(
-        { _id: req.userId },
+        { _id: String(req.userId) },
         {
-          $set: { name: name },
+          $set: { name: String(name) },
         },
         (err) => {
           if (err) {
@@ -123,7 +123,7 @@ router.post(
           }
         }
       );
-      const userData = await User.findById(req.userId);
+      const userData = await User.findById(String(req.userId));
       userData.password = undefined;
       res.cookie("user", JSON.stringify(userData), {
         expires: new Date(new Date().getTime() + 604800 * 1000),

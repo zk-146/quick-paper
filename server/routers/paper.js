@@ -1,6 +1,5 @@
 const express = require("express");
 const Authenticated = require("../middleware/Authenticated");
-const get_cookies = require("../helpers/get_cookies");
 const router = express.Router();
 const SavedPaper = require("../models/dbSavedPapers");
 const PhysicsQuestions = require("../models/dbPhysicsQuestions");
@@ -16,28 +15,28 @@ router.get(
     if (physics) {
       phy = physics.map((data) => {
         let ids = JSON.parse(data);
-        return ids.questions;
+        return ids.questions.toString();
       });
     }
     let chem;
     if (chemistry) {
       chem = chemistry.map((data) => {
         let ids = JSON.parse(data);
-        return ids.questions;
+        return ids.questions.toString();
       });
     }
     let math;
     if (maths) {
       math = maths.map((data) => {
         let ids = JSON.parse(data);
-        return ids.questions;
+        return ids.questions.toString();
       });
     }
     let bio;
     if (biology) {
       bio = biology.map((data) => {
         let ids = JSON.parse(data);
-        return ids.questions;
+        return ids.questions.toString();
       });
     }
     const phyArr = await PhysicsQuestions.find({
@@ -71,8 +70,7 @@ router.post(
       const paperData = req.body.paperData;
 
       paperData.user = req.userId;
-      console.log(req.userId);
-      console.log(paperData);
+
       SavedPaper.create(paperData, (err, data) => {
         if (err) {
           console.log(err);

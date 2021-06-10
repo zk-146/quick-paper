@@ -59,7 +59,7 @@ userSchema.statics.findByCredentials = async (email, password) => {
   if (!validator.isEmail(email)) {
     throw new Error("Invalid email address");
   }
-  const user = await User.findOne({ email });
+  const user = await User.findOne({ email: String(email) });
   if (!user) {
     throw new Error("User doesn't exist");
   }
