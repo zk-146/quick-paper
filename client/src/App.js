@@ -55,7 +55,7 @@ function App() {
               <Nav />
               <DisplayPaper />
             </Route>
-            {user !== null && user1.role == "admin" && (
+            {user !== null && user1.role === "admin" && (
               <Route path="/addQuestion">
                 <Nav />
                 <DisplayLatex />

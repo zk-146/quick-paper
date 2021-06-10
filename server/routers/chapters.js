@@ -5,6 +5,7 @@ const PhysicsChapters = require("../models/dbPhysicsChapters");
 const ChemistryChapters = require("../models/dbChemistryChapters");
 const MathsChapters = require("../models/dbMathsChapters");
 const BiologyChapters = require("../models/dbBiologyChapters");
+const AuthenticatedAdmin = require("../middleware/AuthenticatedAdmin");
 
 router.get(
   "/setpaper/physics",
@@ -26,7 +27,7 @@ router.get(
 
 router.post(
   "/setpaper/physics",
-  Authenticated(async (req, res) => {
+  AuthenticatedAdmin(async (req, res) => {
     try {
       const dbchapters = req.body;
       PhysicsChapters.create(dbchapters, (err, data) => {
@@ -56,14 +57,14 @@ router.get(
       });
     } catch (err) {
       console.log(err);
-      return res.status(500).send();
+      return res.status(400).send();
     }
   })
 );
 
 router.post(
   "/setpaper/chemistry",
-  Authenticated(async (req, res) => {
+  AuthenticatedAdmin(async (req, res) => {
     try {
       const dbchapters = req.body;
       ChemistryChapters.create(dbchapters, (err, data) => {
@@ -100,7 +101,7 @@ router.get(
 
 router.post(
   "/setpaper/maths",
-  Authenticated(async (req, res) => {
+  AuthenticatedAdmin(async (req, res) => {
     try {
       const dbchapters = req.body;
       MathsChapters.create(dbchapters, (err, data) => {
@@ -130,14 +131,14 @@ router.get(
       });
     } catch (err) {
       console.log(err);
-      return res.status(500).send();
+      return res.status(400).send();
     }
   })
 );
 
 router.post(
   "/setpaper/biology",
-  Authenticated(async (req, res) => {
+  AuthenticatedAdmin(async (req, res) => {
     try {
       const dbchapters = req.body;
       BiologyChapters.create(dbchapters, (err, data) => {

@@ -5,9 +5,9 @@ const PhysicsQuestions = require("../models/dbPhysicsQuestions");
 const ChemistryQuestions = require("../models/dbChemistryQuestions");
 const MathsQuestions = require("../models/dbMathsQuestions");
 const BiologyQuestions = require("../models/dbBiologyQuestions");
-const User = require("../models/users");
 const getQuestions = require("../helpers/getQuestions");
 const uploadQuestion = require("../helpers/uploadQuestions");
+const AuthenticatedAdmin = require("../middleware/AuthenticatedAdmin");
 
 const limit = 75;
 
@@ -124,7 +124,7 @@ router.get(
 
 router.post(
   "/add-question/physics",
-  Authenticated(async (req, res) => {
+  AuthenticatedAdmin(async (req, res) => {
     const {
       question,
       option1,
@@ -154,36 +154,33 @@ router.post(
     }
 
     try {
-      const user = await User.findById(req.userId.toString());
-      if (user.role === "admin") {
-        if (subject === "Physics") {
-          const questionData = await uploadQuestion(
-            PhysicsQuestions,
-            question,
-            option1,
-            option2,
-            option3,
-            option4,
-            answer,
-            difficulty,
-            topicName
-          );
-          return res.status(201).send(questionData);
-        }
+      if (subject === "Physics") {
+        const questionData = await uploadQuestion(
+          PhysicsQuestions,
+          question,
+          option1,
+          option2,
+          option3,
+          option4,
+          answer,
+          difficulty,
+          topicName
+        );
+        return res.status(201).send(questionData);
       } else {
         console.log("Unauthorized");
         return res.status(401).json({ error: "Unauthorized access!" });
       }
     } catch (err) {
       console.log(err);
-      return res.status(500).json("Internal server occurred");
+      return res.status(400).json();
     }
   })
 );
 
 router.post(
   "/add-question/chemistry",
-  Authenticated(async (req, res) => {
+  AuthenticatedAdmin(async (req, res) => {
     const {
       question,
       option1,
@@ -213,36 +210,33 @@ router.post(
     }
 
     try {
-      const user = await User.findById(req.userId.toString());
-      if (user.role === "admin") {
-        if (subject === "Chemistry") {
-          const questionData = await uploadQuestion(
-            ChemistryQuestions,
-            question,
-            option1,
-            option2,
-            option3,
-            option4,
-            answer,
-            difficulty,
-            topicName
-          );
-          return res.status(201).send(questionData);
-        }
+      if (subject === "Chemistry") {
+        const questionData = await uploadQuestion(
+          ChemistryQuestions,
+          question,
+          option1,
+          option2,
+          option3,
+          option4,
+          answer,
+          difficulty,
+          topicName
+        );
+        return res.status(201).send(questionData);
       } else {
         console.log("Unauthorized");
         return res.status(401).json({ error: "Unauthorized access!" });
       }
     } catch (err) {
       console.log(err);
-      return res.status(500).json("Internal server occurred");
+      return res.status(400).json();
     }
   })
 );
 
 router.post(
   "/add-question/maths",
-  Authenticated(async (req, res) => {
+  AuthenticatedAdmin(async (req, res) => {
     const {
       question,
       option1,
@@ -272,36 +266,33 @@ router.post(
     }
 
     try {
-      const user = await User.findById(req.userId.toString());
-      if (user.role === "admin") {
-        if (subject === "Maths") {
-          const questionData = await uploadQuestion(
-            MathsQuestions,
-            question,
-            option1,
-            option2,
-            option3,
-            option4,
-            answer,
-            difficulty,
-            topicName
-          );
-          return res.status(201).send(questionData);
-        }
+      if (subject === "Maths") {
+        const questionData = await uploadQuestion(
+          MathsQuestions,
+          question,
+          option1,
+          option2,
+          option3,
+          option4,
+          answer,
+          difficulty,
+          topicName
+        );
+        return res.status(201).send(questionData);
       } else {
         console.log("Unauthorized");
         return res.status(401).json({ error: "Unauthorized access!" });
       }
     } catch (err) {
       console.log(err);
-      return res.status(500).json("Internal server occurred");
+      return res.status(400).json();
     }
   })
 );
 
 router.post(
   "/add-question/biology",
-  Authenticated(async (req, res) => {
+  AuthenticatedAdmin(async (req, res) => {
     const {
       question,
       option1,
@@ -331,29 +322,26 @@ router.post(
     }
 
     try {
-      const user = await User.findById(req.userId.toString());
-      if (user.role === "admin") {
-        if (subject === "Biology") {
-          const questionData = await uploadQuestion(
-            BiologyQuestions,
-            question,
-            option1,
-            option2,
-            option3,
-            option4,
-            answer,
-            difficulty,
-            topicName
-          );
-          return res.status(201).send(questionData);
-        }
+      if (subject === "Biology") {
+        const questionData = await uploadQuestion(
+          BiologyQuestions,
+          question,
+          option1,
+          option2,
+          option3,
+          option4,
+          answer,
+          difficulty,
+          topicName
+        );
+        return res.status(201).send(questionData);
       } else {
         console.log("Unauthorized");
         return res.status(401).json({ error: "Unauthorized access!" });
       }
     } catch (err) {
       console.log(err);
-      return res.status(500).json("Internal server occurred");
+      return res.status(400).json();
     }
   })
 );
