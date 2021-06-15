@@ -1,17 +1,18 @@
 import React, { useEffect } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import Nav from "./Nav/Nav";
-import Login from "./Login/Login";
-import "./App.css";
-import SetPaper from "./SetPaper/SetPaper";
-import DisplayPaper from "./DisplayPaper/DisplayPaper";
-import SignUp from "./SignUp/SignUp";
-import ForgotPassword from "./ForgotPassword/ForgotPassword";
-import Account from "./Account/Account";
-import SavedPaper from "./Account/SavedPaper/SavedPaper";
 import { parseCookies } from "nookies";
+
+import "./App.css";
+import Account from "./pages/Account/Account";
+import DisplayLatex from "./pages/AddQuestion/AddQuestion";
+import DisplayPaper from "./pages/DisplayPaper/DisplayPaper";
+import ForgotPassword from "./pages/ForgotPassword/ForgotPassword";
+import Login from "./pages/Login/Login";
+import Nav from "./Layout/Nav/Nav";
+import SetPaper from "./pages/SetPaper/SetPaper";
+import SignUp from "./pages/SignUp/SignUp";
+import SavedPaper from "./components/SavedPaper/SavedPaper";
 import { useStateValue } from "./Context/StateProvider";
-import DisplayLatex from "./DisplayLatex/DisplayLatex";
 
 function App() {
   const cookie = parseCookies();
