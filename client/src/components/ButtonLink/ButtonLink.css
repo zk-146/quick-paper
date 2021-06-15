@@ -1,0 +1,32 @@
+.btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-decoration: none;
+}
+
+.btn__link > button {
+  align-self: center;
+  justify-self: center;
+  width: auto;
+  padding: 0 30px;
+  height: 40px;
+  font-size: 18px;
+  text-align: center;
+  font-weight: 600;
+  outline: none;
+  border: 1px solid;
+  border-radius: 5px;
+  border-color: #9dd3d8;
+  color: #254159;
+  background: #9dd3d8;
+  cursor: pointer;
+  transition: all 0.2s ease-in;
+  box-shadow: 0 2px 2px rgba(0, 0, 0, 0.1), 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.btn__link > button:hover {
+  /* background-color: #d7eff2; */
+  transform: scale(1.05);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1), 0px 8px 16px rgba(0, 0, 0, 0.1);
+}

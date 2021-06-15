@@ -1,0 +1,16 @@
+.editButton {
+  outline: none;
+  border: none;
+  background-color: transparent;
+}
+
+.editButton > .MuiSvgIcon-root {
+  color: rgb(128, 128, 128);
+  margin-right: 2px;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.MuiSvgIcon-root:hover {
+  color: black;
+}

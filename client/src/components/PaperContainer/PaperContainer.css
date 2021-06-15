@@ -1,0 +1,93 @@
+.paper {
+  width: 50rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* margin-top: 5px; */
+  /* margin-bottom: 30px; */
+}
+
+.paper__container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 100%;
+  background-color: white;
+}
+
+.paper__containerLogoImage {
+  width: 200px;
+  height: 140px;
+  padding: 20px;
+}
+
+.paper__containerInstituteName > p {
+  font-weight: 800;
+  font-size: 20px;
+  border-bottom: 1px solid black;
+}
+
+.paper__containerTitle {
+  font-weight: 700;
+  margin-top: 5px;
+  margin-bottom: 12px;
+}
+
+.paper__containerHeader {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  height: 50px;
+  border-bottom: 1px solid black;
+}
+
+.paper__containerHeader > div {
+  padding: 4px;
+}
+
+.paper__containerHeaderDate {
+  align-self: flex-end;
+  margin-top: -4px;
+}
+
+.paper__containerHeaderTime {
+  align-self: center;
+  position: absolute;
+  margin-top: 4px;
+}
+
+.paper__containerHeaderMarks {
+  align-self: flex-start;
+}
+
+.paper__containerHeaderMarks > p {
+  align-self: flex-start;
+  position: absolute;
+}
+.paper__containerHeaderMarksNegative {
+  margin-top: 20px;
+}
+
+.paper__containerQuestionsTable {
+  /* margin-top: 34px; */
+  width: 43.8rem;
+  border-spacing: 12px;
+  margin-bottom: 20px;
+}
+
+.paper__containerQuestions {
+  align-self: flex-start;
+}
+
+@media screen and (max-width: 500px) {
+  .paper {
+    width: 21rem;
+  }
+  .paper__containerQuestionsTable {
+    width: 16.8rem;
+    border-spacing: 12px;
+    margin-bottom: 20px;
+  }
+}

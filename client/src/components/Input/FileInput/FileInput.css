@@ -1,0 +1,28 @@
+.file__input {
+  margin-bottom: 20px;
+  height: 60px;
+  resize: none;
+  width: 100%;
+  font-size: 16px;
+  outline: none;
+  border-radius: 5px;
+  border: 0.5px solid #d2d5d9;
+  color: #191e26;
+  background: none;
+  box-sizing: border-box;
+  padding: 10px;
+}
+
+.file__input:focus {
+  border-color: #aab2b4;
+}
+
+.file__input::-webkit-outer-spin-button,
+.file__input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.file__input {
+  -moz-appearance: textfield;
+}

@@ -1,0 +1,28 @@
+.account__containerSub {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  padding: 0px 10px;
+  margin-top: 15px;
+  border-bottom: 1px solid rgb(195, 195, 195);
+}
+
+.account__containerSubLeft {
+  color: rgb(41, 41, 41);
+  align-self: flex-start;
+  height: 20px;
+  cursor: default;
+}
+
+.account__containerSubRight {
+  display: flex;
+  color: rgb(41, 41, 41);
+  position: absolute;
+  align-self: flex-end;
+  height: 20px;
+  cursor: default;
+}
+
+.account__containerSubPassword {
+  height: 150px;
+}

@@ -1,0 +1,51 @@
+.account__containerSavedPaper {
+  overflow-y: scroll;
+  height: 400px;
+  width: 100%;
+  margin-top: 40px;
+}
+
+.account__containerTableHeader {
+  display: table-header-group;
+  position: absolute;
+  width: 600px;
+  min-width: 300px;
+  max-width: 100%;
+  font-weight: bold;
+  background-color: rgb(255, 255, 255);
+}
+
+.account__containerTableRow {
+  display: table-row;
+}
+
+.account__containerTableHead {
+  text-align: center;
+  cursor: default;
+  width: 100%;
+}
+
+.account__containerTableCell,
+.account__containerTableHead {
+  text-align: center;
+  display: table-cell;
+  border: 1px solid #999999;
+  border-right: none;
+  border-left: none;
+  border-top: none;
+  vertical-align: middle;
+  padding: 10px 10px;
+  width: 100%;
+  min-width: 140px;
+}
+
+.account__containerTableRow:hover {
+  cursor: pointer;
+  background-color: rgb(204, 218, 231);
+}
+
+.account__noSavedPapers {
+  font-size: 16px;
+  font-weight: 500;
+  padding: 10px;
+}
