@@ -1,0 +1,110 @@
+.signUp {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  margin-top: 120px;
+}
+
+.signUp__container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  align-content: center;
+  width: 300px;
+  max-width: 100%;
+  border-radius: 10px;
+  background: #fff;
+  padding: 50px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1), 0px 8px 16px rgba(0, 0, 0, 0.1);
+}
+
+.signUp__container > p {
+  font-size: 32px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  color: #254159;
+}
+/* 
+.cred__input {
+  width: 250px;
+  height: 40px;
+  font-size: 16px;
+  outline: none;
+  border-radius: 5px;
+  border: 0.5px solid #d2d5d9;
+  color: #191e26;
+  background: none;
+  box-sizing: border-box;
+  margin-bottom: 30px;
+  padding: 10px;
+}
+
+.cred__input:focus {
+  border-color: #aab2b4;
+} */
+/* 
+.btn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-decoration: none;
+}
+
+.btn__link > button {
+  align-self: center;
+  justify-self: center;
+  width: auto;
+  padding: 0 30px;
+  height: 40px;
+  font-size: 18px;
+  text-align: center;
+  font-weight: 600;
+  outline: none;
+  border: 1px solid;
+  border-radius: 5px;
+  border-color: #9dd3d8;
+  color: #254159;
+  background: #9dd3d8;
+  cursor: pointer;
+  transition: all 0.2s ease-in;
+  box-shadow: 0 2px 2px rgba(0, 0, 0, 0.1), 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.btn__link > button:hover {
+  /* background-color: #d7eff2; */
+/* transform: scale(1.05); */
+/* box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1), 0px 8px 16px rgba(0, 0, 0, 0.1); */
+/* }  */
+
+.signUp__containerLink {
+  text-decoration: none;
+}
+
+.signUp__containerNewUserP {
+  font-size: 14px;
+  font-weight: 500;
+  color: rgb(128, 128, 128);
+  margin-top: 30px;
+  transition: color 200ms ease-out;
+}
+
+.signUp__containerNewUserP:hover {
+  color: rgb(41, 41, 41);
+}
+/* 
+.cred__input::-webkit-outer-spin-button,
+.cred__input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.cred__input {
+  -moz-appearance: textfield;
+} */
+
+.input__error {
+  color: red;
+  text-align: center;
+  width: 250px;
+}

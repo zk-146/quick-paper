@@ -1,0 +1,61 @@
+.tables {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 100px;
+  margin-bottom: 100px;
+}
+
+.tables > p {
+  font-size: 32px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  color: rgb(59, 59, 59);
+}
+
+.tables__subject {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 25px;
+  font-weight: 500;
+  letter-spacing: 0.3px;
+  color: rgb(59, 59, 59);
+  margin-top: 40px;
+  margin-bottom: 15px;
+}
+
+.tables__setPaper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 30px;
+}
+
+.tables__setPaperDisabled {
+  width: 200px;
+  font-size: 13px;
+  color: red;
+  margin-left: 10%;
+}
+
+.datePicker {
+  background-color: #fff;
+}
+
+.headerData {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.headerData__option {
+  margin: 10px 20%;
+}
+
+.headerData__optionTime {
+  display: flex;
+  flex-direction: row;
+}
