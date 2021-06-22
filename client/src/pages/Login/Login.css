@@ -19,12 +19,12 @@
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1), 0px 8px 16px rgba(0, 0, 0, 0.1);
 }
 
-.login__container > p {
+/* .login__container > p {
   font-size: 32px;
   font-weight: 700;
   letter-spacing: 0.5px;
   color: #254159;
-}
+} */
 
 .login__password {
   display: flex;

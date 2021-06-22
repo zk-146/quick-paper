@@ -5,6 +5,8 @@ import { parseCookies } from "nookies";
 import "./Login.css";
 import axios from "../../axios";
 import ButtonLink from "../../components/ButtonLink/ButtonLink";
+import ErrorText from "../../components/ErrorText/ErrorText";
+import Heading from "../../components/Heading/Heading";
 import TextInput from "../../components/Input/TextInput/TextInput";
 import { useStateValue } from "../../Context/StateProvider";
 
@@ -45,7 +47,8 @@ const Login = () => {
   return (
     <div className="login">
       <form className="login__container">
-        <p>Sign In</p>
+        {/* <p>Sign In</p> */}
+        <Heading text={"Sign In"} />
 
         <TextInput
           type={"email"}
@@ -67,7 +70,7 @@ const Login = () => {
           </Link>
         </div>
 
-        {error && <p className="input__error">{error}</p>}
+        {error && <ErrorText error={error} />}
 
         <ButtonLink
           type="submit"

@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 
 import "./ForgotPassword.css";
 import ButtonLink from "../../components/ButtonLink/ButtonLink";
+import Heading from "../../components/Heading/Heading";
 import TextInput from "../../components/Input/TextInput/TextInput";
 
 const ForgotPassword = () => {
@@ -15,7 +16,7 @@ const ForgotPassword = () => {
     <div className="forgotPassword">
       <div className="forgotPassword__container">
         <div className="forgotPassword__containerHeader">
-          <p>Forgot Your Password?</p>
+          <Heading text={"Forgot Your Password?"} />
         </div>
         <p>
           Enter the email address that you used to sign-up. We'll send you an

@@ -6,6 +6,8 @@ import validator from "validator";
 import "./SignUp.css";
 import axios from "../../axios";
 import ButtonLink from "../../components/ButtonLink/ButtonLink";
+import ErrorText from "../../components/ErrorText/ErrorText";
+import Heading from "../../components/Heading/Heading";
 import TextInput from "../../components/Input/TextInput/TextInput";
 import { useStateValue } from "../../Context/StateProvider";
 
@@ -69,7 +71,7 @@ const SignUp = () => {
   return (
     <div className="signUp">
       <form className="signUp__container">
-        <p>Sign Up</p>
+        <Heading text={"Sign Up"} />
         <TextInput
           type={"text"}
           placeholder="Name"
@@ -95,7 +97,7 @@ const SignUp = () => {
           onChange={(event) => setPhone(event.target.value)}
         />
 
-        {error && <p className="input__error">{error}</p>}
+        {error && <ErrorText error={error} />}
 
         <ButtonLink
           type="submit"
