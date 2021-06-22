@@ -13,6 +13,7 @@ import SetPaper from "./pages/SetPaper/SetPaper";
 import SignUp from "./pages/SignUp/SignUp";
 import SavedPaper from "./components/SavedPaper/SavedPaper";
 import { useStateValue } from "./Context/StateProvider";
+import AddQuestion from "./pages/AddQuestion/AddQuestion";
 import AddTopic from "./pages/AddTopic/AddTopic";
 
 function App() {
@@ -66,7 +67,7 @@ function App() {
             {user !== null && user1.role === "admin" && (
               <Route path="/addQuestion">
                 <Nav />
-                <DisplayLatex />
+                <AddQuestion />
               </Route>
             )}
             <Route path="/account">

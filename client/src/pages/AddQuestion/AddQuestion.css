@@ -1,4 +1,4 @@
-.displayLatex {
+.addQuestion {
   margin-top: 100px;
   display: flex;
   flex-direction: column;
@@ -6,7 +6,7 @@
   margin-bottom: 20px;
 }
 
-.displayLatex__containter {
+.addQuestion__containter {
   background-color: #fff;
   border-radius: 10px;
   padding: 30px;
@@ -16,41 +16,41 @@
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1), 0px 8px 16px rgba(0, 0, 0, 0.1);
 }
 
-.displayLatex__select {
+.addQuestion__select {
   display: flex;
   justify-content: space-around;
 }
 
-.displayLatex__select > select {
+.addQuestion__select > select {
   margin-right: 5px;
 }
 
-.displayLatex__input {
+.addQuestion__input {
   margin-bottom: 20px;
   height: 60px;
   resize: none;
   width: 100%;
 }
 
-.displayLatex__output {
+.addQuestion__output {
   margin-top: 5px;
   width: 100%;
   word-wrap: break-word;
 }
 
-.displayLatex__preview {
+.addQuestion__preview {
   font-size: 22px;
   margin-top: 20px;
   font-weight: 700;
 }
 
-.displayLatex__inputError {
+.addQuestion__inputError {
   color: red;
   text-align: center;
   width: 100%;
 }
 
-.displayLatex__inputSuccess {
+.addQuestion__inputSuccess {
   color: rgb(67, 192, 67);
   text-align: center;
   width: 100%;

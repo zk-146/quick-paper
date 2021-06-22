@@ -5,6 +5,7 @@ import "./AddQuestion.css";
 import axios from "../../axios";
 import Button from "../../components/Button/Button";
 import FileInput from "../../components/Input/FileInput/FileInput";
+import Heading from "../../components/Heading/Heading";
 import RenderLatex from "../../components/Latex/RendexLatex";
 import TextAreaInput from "../../components/Input/TextAreaInput/TextAreaInput";
 
@@ -84,9 +85,10 @@ const AddQuestion = () => {
   }, [question, option1, option2, option3, option4, answer]);
 
   return (
-    <div className="displayLatex">
-      <div className="displayLatex__containter">
-        <div className="displayLatex__select">
+    <div className="addQuestion">
+      <Heading text={"Add Questions"} />
+      <div className="addQuestion__containter">
+        <div className="addQuestion__select">
           <select
             className="text__input"
             onChange={(e) => {
@@ -118,7 +120,7 @@ const AddQuestion = () => {
           </select>
         </div>
         <select
-          className="text__input displayLatex__input"
+          className="text__input addQuestion__input"
           onChange={(e) => {
             setTopicName(e.target.value);
           }}
@@ -205,45 +207,45 @@ const AddQuestion = () => {
           placeholder={"Answer Image 3"}
           onChange={(e) => console.log(e)}
         />
-        <p className="displayLatex__preview">Preview</p>
+        <p className="addQuestion__preview">Preview</p>
         {loadLatex && (
           <RenderLatex>
-            <p className="displayLatex__output">
+            <p className="addQuestion__output">
               <strong>Subject:</strong> {subject}
             </p>
-            <p className="displayLatex__output">
+            <p className="addQuestion__output">
               <strong> Difficulty: </strong>
               {difficulty.toUpperCase()}
             </p>
-            <p className="displayLatex__output">
+            <p className="addQuestion__output">
               <strong>Topic Name: </strong>
               {topicName}
             </p>
-            <p className="displayLatex__output">
+            <p className="addQuestion__output">
               <strong>Question:</strong> {question}
             </p>
-            <p className="displayLatex__output">
+            <p className="addQuestion__output">
               <strong>Option 1:</strong> {option1}
             </p>
-            <p className="displayLatex__output">
+            <p className="addQuestion__output">
               <strong>Option 2:</strong> {option2}
             </p>
-            <p className="displayLatex__output">
+            <p className="addQuestion__output">
               <strong>Option 3:</strong> {option3}
             </p>
-            <p className="displayLatex__output">
+            <p className="addQuestion__output">
               <strong>Option 4:</strong> {option4}
             </p>
-            <p className="displayLatex__output">
+            <p className="addQuestion__output">
               <strong>Answer:</strong> {answer}
             </p>
           </RenderLatex>
         )}
         {uploadError && (
-          <p className="displayLatex__inputError">{uploadError}</p>
+          <p className="addQuestion__inputError">{uploadError}</p>
         )}
         {uploaded && (
-          <p className="displayLatex__inputSuccess">
+          <p className="addQuestion__inputSuccess">
             Question uploaded successfully
           </p>
         )}
