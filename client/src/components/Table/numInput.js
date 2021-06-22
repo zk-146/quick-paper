@@ -1,7 +1,7 @@
 const numInput = (event, id, allChapters, allChaptersChange) => {
   let pattern = /^([0-1]?[0-9]|20)$/;
   let value = event.target.value;
-  let index = id - 1;
+  let index = id;
   let chapters = [...allChapters];
 
   if (pattern.test(value)) {

@@ -4,7 +4,8 @@ const handleCheckboxChange = (
   allChaptersChange,
   allChapters
 ) => {
-  let index = id - 1;
+  // let index = id - 1;
+  let index = id;
   let chapters = [...allChapters];
   let length = chapters.length;
   let isChecked = chapters[index].isChecked;

@@ -20,9 +20,9 @@ const Table = (props) => {
           "Content-Type": "application/json",
         },
       });
-      req.data.sort(function (a, b) {
-        return a.id - b.id;
-      });
+      // req.data.sort(function (a, b) {
+      // return a.id - b.id;
+      // });
       allChaptersChange(req.data);
     };
     fetchData();
@@ -110,7 +110,7 @@ const Table = (props) => {
 
         {allChapters.map((data, id) => {
           return (
-            <div key={data.id} className="table__row">
+            <div key={data + id} className="table__row">
               <div className="table__cell">{id + 1}</div>
 
               <div className="table__cell table__cellChapter">{data.name}</div>
@@ -124,7 +124,7 @@ const Table = (props) => {
                   disabled={data.isCheckBoxDis}
                   onChange={() => {
                     handleCheckboxChange(
-                      data.id,
+                      id,
                       changeSelectAll,
                       allChaptersChange,
                       allChapters
@@ -143,7 +143,7 @@ const Table = (props) => {
                   value={data.value}
                   disabled={data.isNumDisabled}
                   onChange={(event) => {
-                    numInput(event, data.id, allChapters, allChaptersChange);
+                    numInput(event, id, allChapters, allChaptersChange);
                   }}
                 />
               </div>
