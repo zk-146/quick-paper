@@ -79,6 +79,18 @@ function Nav() {
             </div>
           </div>
         )}
+        {user !== null && user1.role === "admin" && (
+          <div>
+            <div className="header__option">
+              <Link to="/addTopic" className="header__link">
+                <span className="header__optionContents">
+                  <MdLibraryAdd />
+                  Add Topic
+                </span>
+              </Link>
+            </div>
+          </div>
+        )}
         <div>
           <div className="header__option">
             <Link

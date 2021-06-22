@@ -13,6 +13,7 @@ import SetPaper from "./pages/SetPaper/SetPaper";
 import SignUp from "./pages/SignUp/SignUp";
 import SavedPaper from "./components/SavedPaper/SavedPaper";
 import { useStateValue } from "./Context/StateProvider";
+import AddTopic from "./pages/AddTopic/AddTopic";
 
 function App() {
   const cookie = parseCookies();
@@ -56,6 +57,12 @@ function App() {
               <Nav />
               <DisplayPaper />
             </Route>
+            {user !== null && user1.role === "admin" && (
+              <Route path="/addTopic">
+                <Nav />
+                <AddTopic />
+              </Route>
+            )}
             {user !== null && user1.role === "admin" && (
               <Route path="/addQuestion">
                 <Nav />
