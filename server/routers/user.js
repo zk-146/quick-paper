@@ -3,6 +3,7 @@ const Authenticated = require("../middleware/Authenticated");
 const router = express.Router();
 const User = require("../models/users");
 const validator = require("validator");
+const AuthenticatedAdmin = require("../middleware/AuthenticatedAdmin");
 
 router.post("/signup", async (req, res) => {
   const { name, email, password, mobile } = req.body;
@@ -132,6 +133,19 @@ router.post(
     } catch (err) {
       console.log(err);
       return res.status(400).send();
+    }
+  })
+);
+
+router.get(
+  "/user/all",
+  AuthenticatedAdmin(async (req, res) => {
+    try {
+      const allUsers = await User.find();
+      res.send(allUsers);
+    } catch (err) {
+      console.log(err);
+      res.status(400).send();
     }
   })
 );
