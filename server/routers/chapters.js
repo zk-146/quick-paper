@@ -30,8 +30,15 @@ router.post(
   AuthenticatedAdmin(async (req, res) => {
     try {
       const dbchapters = req.body;
+      dbchapters.value = "";
+      dbchapters.isChecked = false;
+      dbchapters.isCheckBoxDis = false;
+      dbchapters.isNumDisabled = true;
+      dbchapters.isRandChecked = false;
+
       PhysicsChapters.create(dbchapters, (err, data) => {
         if (err) {
+          console.log(err);
           return res.status(500).send();
         } else {
           return res.status(201).send(data);
@@ -67,6 +74,11 @@ router.post(
   AuthenticatedAdmin(async (req, res) => {
     try {
       const dbchapters = req.body;
+      dbchapters.value = "";
+      dbchapters.isChecked = false;
+      dbchapters.isCheckBoxDis = false;
+      dbchapters.isNumDisabled = true;
+      dbchapters.isRandChecked = false;
       ChemistryChapters.create(dbchapters, (err, data) => {
         if (err) {
           return res.status(500).send();
@@ -104,6 +116,11 @@ router.post(
   AuthenticatedAdmin(async (req, res) => {
     try {
       const dbchapters = req.body;
+      dbchapters.value = "";
+      dbchapters.isChecked = false;
+      dbchapters.isCheckBoxDis = false;
+      dbchapters.isNumDisabled = true;
+      dbchapters.isRandChecked = false;
       MathsChapters.create(dbchapters, (err, data) => {
         if (err) {
           return res.status(500).send();
@@ -141,6 +158,11 @@ router.post(
   AuthenticatedAdmin(async (req, res) => {
     try {
       const dbchapters = req.body;
+      dbchapters.value = "";
+      dbchapters.isChecked = false;
+      dbchapters.isCheckBoxDis = false;
+      dbchapters.isNumDisabled = true;
+      dbchapters.isRandChecked = false;
       BiologyChapters.create(dbchapters, (err, data) => {
         if (err) {
           return res.status(500).send();

@@ -1,13 +1,12 @@
 const mongoose = require("mongoose");
 
 const biochaptersSchema = mongoose.Schema({
-  id: Number,
-  name: String,
-  value: String,
-  isChecked: Boolean,
-  isCheckBoxDis: Boolean,
-  isNumDisabled: Boolean,
-  isRandChecked: Boolean,
+  name: { type: String, required: true, trim: true },
+  value: { type: String, default: "", trim: true },
+  isChecked: { type: Boolean, required: true, default: false },
+  isCheckBoxDis: { type: Boolean, required: true, default: false },
+  isNumDisabled: { type: Boolean, required: true, default: false },
+  isRandChecked: { type: Boolean, required: true, default: false },
 });
 
 module.exports = mongoose.model("biologyChapters", biochaptersSchema);
