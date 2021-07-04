@@ -1,6 +1,6 @@
-import React from "react";
-
 import "./PaperContainer.css";
+
+import React from "react";
 import RenderLatex from "../Latex/RendexLatex";
 
 const PaperContainer = ({ arr }) => {
@@ -15,75 +15,124 @@ const PaperContainer = ({ arr }) => {
             >
               {arr.map((data, index) => {
                 return (
-                  <tbody
-                    key={data._id}
-                    className="paper__containerQuestionsTableBody"
-                  >
-                    <tr className="">
+                  <tbody key={data._id}>
+                    <tr className="paper__containerData">
                       <td
                         valign="top"
                         align="center"
-                        className="paper__containerQuestionsTableBodyCell"
+                        className="paper__containerText"
                       >
                         <p style={{ fontSize: "14px", fontWeight: "700" }}>
                           {index + 1 + ")"}
                         </p>
+                        <p style={{ marginLeft: "10px" }}>{data.question}</p>
                       </td>
-                      <td className="paper__containerQuestionsTableBodyCell">
-                        {data.question}
-                        {arr.questionImage && <img src="" alt="" />}
+                      <td className="paper__containerImages">
+                        {data.questionsUrls[0].url !== "" && (
+                          <img
+                            className="paper__containerImage"
+                            src={data.questionsUrls[0].url}
+                            alt=""
+                          />
+                        )}
+                        {data.questionsUrls[1].url !== "" && (
+                          <img
+                            className="paper__containerImage"
+                            src={data.questionsUrls[1].url}
+                            alt=""
+                          />
+                        )}
+                        {data.questionsUrls[2].url !== "" && (
+                          <img
+                            className="paper__containerImage"
+                            src={data.questionsUrls[2].url}
+                            alt=""
+                          />
+                        )}
                       </td>
                     </tr>
-                    <tr>
+                    <tr className="paper__containerData">
                       <td
                         valign="top"
                         align="center"
-                        className="paper__containerQuestionsTableBodyCell"
+                        className="paper__containerText"
                       >
-                        {"A)"}
+                        <p style={{ fontSize: "14px", fontWeight: "700" }}>
+                          {"A)"}
+                        </p>
+                        <p style={{ marginLeft: "10px" }}>{data.option1}</p>
                       </td>
-                      <td>
-                        {data.option1}
-                        {arr.option1Image && <img src="" alt="" />}
+                      <td className="paper__containerImages">
+                        {data.optionsUrls[0].url !== "" && (
+                          <img
+                            className="paper__containerImage"
+                            src={data.optionsUrls[0].url}
+                            alt=""
+                          />
+                        )}
                       </td>
                     </tr>
-                    <tr>
+                    <tr className="paper__containerData">
                       <td
                         valign="top"
                         align="center"
-                        className="paper__containerQuestionsTableBodyCell"
+                        className="paper__containerText"
                       >
-                        {"B)"}
+                        <p style={{ fontSize: "14px", fontWeight: "700" }}>
+                          {"B)"}
+                        </p>
+                        <p style={{ marginLeft: "10px" }}>{data.option2}</p>
                       </td>
-                      <td>
-                        {data.option2}
-                        {arr.option2Image && <img src="" alt="" />}
+                      <td className="paper__containerImages">
+                        {data.optionsUrls[1].url !== "" && (
+                          <img
+                            className="paper__containerImage"
+                            src={data.optionsUrls[1].url}
+                            alt=""
+                          />
+                        )}
                       </td>
                     </tr>
-                    <tr>
+                    <tr className="paper__containerData">
                       <td
                         valign="top"
                         align="center"
-                        className="paper__containerQuestionsTableBodyCell"
+                        className="paper__containerText"
                       >
-                        {"C)"}
+                        <p style={{ fontSize: "14px", fontWeight: "700" }}>
+                          {"C)"}
+                        </p>
+                        <p style={{ marginLeft: "10px" }}>{data.option3}</p>
                       </td>
-                      <td>
-                        {data.option3}
-                        {arr.option3Image && <img src="" alt="" />}
+                      <td className="paper__containerImages">
+                        {data.optionsUrls[2].url !== "" && (
+                          <img
+                            className="paper__containerImage"
+                            src={data.optionsUrls[2].url}
+                            alt=""
+                          />
+                        )}
                       </td>
                     </tr>
-                    <tr>
+                    <tr className="paper__containerData">
                       <td
                         valign="top"
                         align="center"
-                        className="paper__containerQuestionsTableBodyCell"
+                        className="paper__containerText"
                       >
-                        {"D)"}
+                        <p style={{ fontSize: "14px", fontWeight: "700" }}>
+                          {"D)"}
+                        </p>
+                        <p style={{ marginLeft: "10px" }}>{data.option4}</p>
                       </td>
-                      <td>
-                        {data.option4}
-                        {arr.option4Image && <img src="" alt="" />}
+                      <td className="paper__containerImages">
+                        {data.optionsUrls[3].url !== "" && (
+                          <img
+                            className="paper__containerImage"
+                            src={data.optionsUrls[3].url}
+                            alt=""
+                          />
+                        )}
                       </td>
                     </tr>
                   </tbody>
