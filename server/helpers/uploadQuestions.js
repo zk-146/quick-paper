@@ -7,7 +7,10 @@ const uploadQuestion = async (
   option4,
   answer,
   difficulty,
-  topicName
+  topicName,
+  questionsUrls,
+  answersUrls,
+  optionsUrls
 ) => {
   const questionData = await model.create({
     question: question.toString(),
@@ -16,6 +19,9 @@ const uploadQuestion = async (
     option3: option3.toString(),
     option4: option4.toString(),
     answer: answer.toString(),
+    questionsUrls,
+    answersUrls,
+    optionsUrls,
     difficulty: difficulty.toString().toLowerCase(),
     topicName: topicName.toString(),
   });

@@ -1,24 +1,101 @@
-import React, { useEffect } from "react";
-import { useState } from "react";
-
 import "./AddQuestion.css";
-import axios from "../../axios";
+
+import React, { useEffect, useState } from "react";
+
 import Button from "../../components/Button/Button";
 import FileInput from "../../components/Input/FileInput/FileInput";
 import Heading from "../../components/Heading/Heading";
 import RenderLatex from "../../components/Latex/RendexLatex";
 import TextAreaInput from "../../components/Input/TextAreaInput/TextAreaInput";
+import axios from "../../axios";
+import handleSubmit from "./handleSubmit";
 
 const AddQuestion = () => {
-  const [question, setQuestion] = useState("");
-  const [option1, setOption1] = useState("");
-  const [option2, setOption2] = useState("");
-  const [option3, setOption3] = useState("");
-  const [option4, setOption4] = useState("");
-  const [subject, setSubject] = useState("Physics");
-  const [answer, setAnswer] = useState("");
+  const [question, setQuestion] = useState("axioss");
+  const [option1, setOption1] = useState("axioss");
+  const [option2, setOption2] = useState("axioss");
+  const [option3, setOption3] = useState("axioss");
+  const [option4, setOption4] = useState("axioss");
+  const [subject, setSubject] = useState("Maths");
+  const [answer, setAnswer] = useState("axioss");
   const [difficulty, setDifficulty] = useState("easy");
   const [uploadError, setUploadError] = useState("");
+
+  const [questionsUrls, setQuestionsUrls] = useState([
+    {
+      url: "",
+    },
+    {
+      url: "",
+    },
+    {
+      url: "",
+    },
+  ]);
+
+  const [answersUrls, setAnswersUrls] = useState([
+    {
+      url: "",
+    },
+    {
+      url: "",
+    },
+    {
+      url: "",
+    },
+  ]);
+
+  const [optionsUrls, setOptionsUrls] = useState([
+    {
+      url: "",
+    },
+    {
+      url: "",
+    },
+    {
+      url: "",
+    },
+    {
+      url: "",
+    },
+  ]);
+
+  const [questionsMedia, setQuestionsMedia] = useState([
+    {
+      media: "",
+    },
+    {
+      media: "",
+    },
+    {
+      media: "",
+    },
+  ]);
+  const [answersMedia, setAnswersMedia] = useState([
+    {
+      media: "",
+    },
+    {
+      media: "",
+    },
+    {
+      media: "",
+    },
+  ]);
+  const [optionsMedia, setOptionsMedia] = useState([
+    {
+      media: "",
+    },
+    {
+      media: "",
+    },
+    {
+      media: "",
+    },
+    {
+      media: "",
+    },
+  ]);
 
   const [topicName, setTopicName] = useState("");
   const [allTopics, setAllTopics] = useState([]);
@@ -30,6 +107,23 @@ const AddQuestion = () => {
   const difficulties = ["Easy", "Moderate", "Hard"];
 
   const [loadLatex, setLoadLatex] = useState(false);
+
+  const changeMedia = (event, index, questions, answers, options) => {
+    console.log("questions", questions);
+    if (questions) {
+      let tempMedias = [...questionsMedia];
+      tempMedias[index].media = event.target.files[0];
+      setQuestionsMedia(tempMedias);
+    } else if (answers) {
+      let tempMedias = [...answersMedia];
+      tempMedias[index].media = event.target.files[0];
+      setAnswersMedia(tempMedias);
+    } else if (options) {
+      let tempMedias = [...optionsMedia];
+      tempMedias[index].media = event.target.files[0];
+      setOptionsMedia(tempMedias);
+    }
+  };
 
   useEffect(() => {
     const getChapters = async () => {
@@ -47,17 +141,32 @@ const AddQuestion = () => {
     getChapters();
   }, [subject]);
 
-  const uploadQuestion = async (e) => {
-    e.preventDefault();
+  const uploadQuestion = async (event) => {
+    event.preventDefault();
+    await handleSubmit(
+      questionsMedia,
+      answersMedia,
+      optionsMedia,
+      questionsUrls,
+      answersUrls,
+      optionsUrls,
+      setQuestionsUrls,
+      setAnswersUrls,
+      setOptionsUrls
+    );
+
     await axios
       .post(`/add-question/${subject.toLowerCase()}`, {
         question,
+        questionsUrls,
         option1,
         option2,
         option3,
         option4,
-        subject,
+        optionsUrls,
         answer,
+        answersUrls,
+        subject,
         difficulty,
         topicName,
       })
@@ -70,7 +179,7 @@ const AddQuestion = () => {
       })
       .catch((err) => {
         setUploaded(false);
-        setUploadError(err.response.data.error);
+        setUploadError(err.responsevent.data.error);
       });
   };
 
@@ -91,8 +200,8 @@ const AddQuestion = () => {
         <div className="addQuestion__select">
           <select
             className="text__input"
-            onChange={(e) => {
-              setSubject(e.target.value);
+            onChange={(event) => {
+              setSubject(event.target.value);
             }}
           >
             {allSubjects.map((data, index) => {
@@ -106,8 +215,8 @@ const AddQuestion = () => {
 
           <select
             className="text__input"
-            onChange={(e) => {
-              setDifficulty(e.target.value);
+            onChange={(event) => {
+              setDifficulty(event.target.value);
             }}
           >
             {difficulties.map((data, index) => {
@@ -121,8 +230,8 @@ const AddQuestion = () => {
         </div>
         <select
           className="text__input addQuestion__input"
-          onChange={(e) => {
-            setTopicName(e.target.value);
+          onChange={(event) => {
+            setTopicName(event.target.value);
           }}
         >
           {allTopics.map((data, index) => {
@@ -135,77 +244,77 @@ const AddQuestion = () => {
         </select>
         <TextAreaInput
           placeholder={"Question"}
-          onChange={(e) => setQuestion(e.target.value)}
+          onChange={(event) => setQuestion(event.target.value)}
         />
         Question Image 1
         <FileInput
           placeholder={"Question Image 1"}
-          onChange={(e) => console.log(e)}
+          onChange={(event) => changeMedia(event, 0, true)}
         />
         Question Image 2
         <FileInput
           placeholder={"Question Image 2"}
-          onChange={(e) => console.log(e)}
+          onChange={(event) => changeMedia(event, 1, true)}
         />
         Question Image 3
         <FileInput
           placeholder={"Question Image 3"}
-          onChange={(e) => console.log(e)}
+          onChange={(event) => changeMedia(event, 2, true)}
         />
         <TextAreaInput
           placeholder={"Option 1*"}
-          onChange={(e) => setOption1(e.target.value)}
+          onChange={(event) => setOption1(event.target.value)}
         />
         Option 1 Image
         <FileInput
           placeholder={"Option 1 Image"}
-          onChange={(e) => console.log(e)}
+          onChange={(event) => changeMedia(event, 0, false, false, true)}
         />
         <TextAreaInput
           placeholder={"Option 2*"}
-          onChange={(e) => setOption2(e.target.value)}
+          onChange={(event) => setOption2(event.target.value)}
         />
         Option 2 Image
         <FileInput
           placeholder={"Option 2 Image"}
-          onChange={(e) => console.log(e)}
+          onChange={(event) => changeMedia(event, 1, false, false, true)}
         />
         <TextAreaInput
           placeholder={"Option 3*"}
-          onChange={(e) => setOption3(e.target.value)}
+          onChange={(event) => setOption3(event.target.value)}
         />
         Option 3 Image
         <FileInput
           placeholder={"Option 3 Image"}
-          onChange={(e) => console.log(e)}
+          onChange={(event) => changeMedia(event, 2, false, false, true)}
         />
         <TextAreaInput
           placeholder={"Option 4*"}
-          onChange={(e) => setOption4(e.target.value)}
+          onChange={(event) => setOption4(event.target.value)}
         />
         Option 4 Image
         <FileInput
           placeholder={"Option 4 Image"}
-          onChange={(e) => console.log(e)}
+          onChange={(event) => changeMedia(event, 3, false, false, true)}
         />
         <TextAreaInput
           placeholder={"Answer*"}
-          onChange={(e) => setAnswer(e.target.value)}
+          onChange={(event) => setAnswer(event.target.value)}
         />
         Answer Image 1
         <FileInput
           placeholder={"Answer Image 1"}
-          onChange={(e) => console.log(e)}
+          onChange={(event) => changeMedia(event, 0, false, true)}
         />
         Answer Image 2
         <FileInput
           placeholder={"Answer Image 2"}
-          onChange={(e) => console.log(e)}
+          onChange={(event) => changeMedia(event, 1, false, true)}
         />
         Answer Image 3
         <FileInput
           placeholder={"Answer Image 3"}
-          onChange={(e) => console.log(e)}
+          onChange={(event) => changeMedia(event, 2, false, true)}
         />
         <p className="addQuestion__preview">Preview</p>
         {loadLatex && (
