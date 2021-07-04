@@ -9,7 +9,7 @@ const getQuestions = require("../helpers/getQuestions");
 const uploadQuestion = require("../helpers/uploadQuestions");
 const AuthenticatedAdmin = require("../middleware/AuthenticatedAdmin");
 
-const limit = 75;
+const LIMIT = 75;
 
 router.get(
   "/displaypaper/physics",
@@ -18,13 +18,13 @@ router.get(
     const phyChapters = req.query.phyChptList;
 
     const questions = parseInt(query.phyQuestions);
-    if (questions > limit || questions < 1) {
+    if (questions > LIMIT || questions < 1) {
       res.status(400).send();
       return;
     }
     if (
       query.hasOwnProperty("phyQuestions") &&
-      questions <= limit &&
+      questions <= LIMIT &&
       questions > 0
     ) {
       try {
@@ -45,12 +45,12 @@ router.get(
     const chemChapters = req.query.chemChptList;
 
     var questions = parseInt(query.chemQuestions);
-    if (questions > limit || questions < 1) {
+    if (questions > LIMIT || questions < 1) {
       return res.status(400).send();
     }
     if (
       query.hasOwnProperty("chemQuestions") &&
-      questions <= limit &&
+      questions <= LIMIT &&
       questions > 0
     ) {
       try {
@@ -74,12 +74,12 @@ router.get(
     const mathsChapters = req.query.mathsChptList;
 
     const questions = parseInt(query.mathsQuestions);
-    if (questions > limit || questions < 1) {
+    if (questions > LIMIT || questions < 1) {
       return res.status(400).send();
     }
     if (
       query.hasOwnProperty("mathsQuestions") &&
-      questions <= limit &&
+      questions <= LIMIT &&
       questions > 0
     ) {
       try {
@@ -103,12 +103,12 @@ router.get(
     const bioChapters = req.query.bioChptList;
 
     var questions = parseInt(query.bioQuestions);
-    if (questions > limit || questions < 1) {
+    if (questions > LIMIT || questions < 1) {
       return res.status(400).send();
     }
     if (
       query.hasOwnProperty("bioQuestions") &&
-      questions <= limit &&
+      questions <= LIMIT &&
       questions > 0
     ) {
       try {
@@ -135,7 +135,11 @@ router.post(
       answer,
       difficulty,
       topicName,
+      questionsUrls,
+      answersUrls,
+      optionsUrls,
     } = req.body;
+    console.log(req.body);
 
     if (
       !question ||
@@ -164,7 +168,10 @@ router.post(
           option4,
           answer,
           difficulty,
-          topicName
+          topicName,
+          questionsUrls,
+          answersUrls,
+          optionsUrls
         );
         return res.status(201).send(questionData);
       } else {
@@ -191,6 +198,9 @@ router.post(
       answer,
       difficulty,
       topicName,
+      questionsUrls,
+      answersUrls,
+      optionsUrls,
     } = req.body;
 
     if (
@@ -220,7 +230,10 @@ router.post(
           option4,
           answer,
           difficulty,
-          topicName
+          topicName,
+          questionsUrls,
+          answersUrls,
+          optionsUrls
         );
         return res.status(201).send(questionData);
       } else {
@@ -247,7 +260,12 @@ router.post(
       answer,
       difficulty,
       topicName,
+      questionsUrls,
+      answersUrls,
+      optionsUrls,
     } = req.body;
+
+    console.log("req.body", req.body);
 
     if (
       !question ||
@@ -276,15 +294,19 @@ router.post(
           option4,
           answer,
           difficulty,
-          topicName
+          topicName,
+          questionsUrls,
+          answersUrls,
+          optionsUrls
         );
+
         return res.status(201).send(questionData);
       } else {
         console.log("Unauthorized");
         return res.status(401).json({ error: "Unauthorized access!" });
       }
     } catch (err) {
-      console.log(err);
+      console.log(err, "err");
       return res.status(400).json();
     }
   })
@@ -303,6 +325,9 @@ router.post(
       answer,
       difficulty,
       topicName,
+      questionsUrls,
+      answersUrls,
+      optionsUrls,
     } = req.body;
 
     if (
@@ -332,7 +357,10 @@ router.post(
           option4,
           answer,
           difficulty,
-          topicName
+          topicName,
+          questionsUrls,
+          answersUrls,
+          optionsUrls
         );
         return res.status(201).send(questionData);
       } else {

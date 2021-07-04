@@ -2,19 +2,65 @@ const mongoose = require("mongoose");
 
 const bioQuestionsSchema = mongoose.Schema({
   topicName: { type: String, required: true },
-  question: { type: String, required: true, unique: true },
-  imgUrl: { type: String },
+  question: { type: String, required: true },
+  questionsUrls: [
+    {
+      url: {
+        type: String,
+        trim: true,
+      },
+      url: {
+        type: String,
+        trim: true,
+      },
+      url: {
+        type: String,
+        trim: true,
+      },
+    },
+  ],
   difficulty: { type: String, required: true },
   option1: { type: String, required: true },
   option2: { type: String, required: true },
   option3: { type: String, required: true },
   option4: { type: String, required: true },
-  option1Img: { type: String },
-  option2Img: { type: String },
-  option3Img: { type: String },
-  option4Img: { type: String },
+  optionsUrls: [
+    {
+      url: {
+        type: String,
+        trim: true,
+      },
+      url: {
+        type: String,
+        trim: true,
+      },
+      url: {
+        type: String,
+        trim: true,
+      },
+      url: {
+        type: String,
+        trim: true,
+      },
+    },
+  ],
   answer: { type: String, required: true },
-  answerImg: { type: String },
+  answersUrls: [
+    {
+      url: {
+        type: String,
+        trim: true,
+      },
+      url: {
+        type: String,
+        trim: true,
+      },
+      url: {
+        type: String,
+        trim: true,
+      },
+    },
+  ],
 });
 
 module.exports = mongoose.model("biology_questions", bioQuestionsSchema);
